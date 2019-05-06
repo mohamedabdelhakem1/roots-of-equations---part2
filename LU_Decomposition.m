@@ -1,6 +1,7 @@
-function [x ,steps] = LU_Decomposition(n , equations)
+function [x ,etime,steps] = LU_Decomposition(n , equations)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here.
+tic;
 x = zeros(n,1);
 a = zeros(n , n);
 b = zeros(n , 1);
@@ -42,9 +43,6 @@ end
 
 y
 
-steps  = {l,u,y};
-
-
 % U X = Y
 x(n) = y(n) / lu(n,n);
 i = n - 1;
@@ -59,5 +57,8 @@ while (i > 0)
     x(i) = x(i) / lu(i,i);
     i = i - 1;
 end
+steps  = [l,y,b,u,x,y]
+steps= double(steps);
+etime = toc;
 
 end

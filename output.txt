@@ -1,8 +1,8 @@
 		Gauss Elimination
 
 the solution is:
-	1)	-0.428571
-	2)	0.428571
-	3)	0.357143
+	1)	-0.400000
+	2)	2.600000
+	3)	2.000000
 
-Elapsed Time: 0.101968
+Elapsed Time: 0.117965

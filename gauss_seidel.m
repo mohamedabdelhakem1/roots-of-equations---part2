@@ -1,6 +1,6 @@
-function [solution , arr] = gauss_seidel (m,sys_of_eqns , intial_guess,max_iter ,eps, handles)
+function [solution,etime , arr] = gauss_seidel (m,sys_of_eqns , intial_guess,max_iter ,eps, handles)
 A = zeros(m , m);
-
+tic;
 B = zeros(m , 1);
 [A  B] = equationsToMatrix(sym(sys_of_eqns));
 X = intial_guess;
@@ -34,6 +34,7 @@ if exist('handles', 'var')
     cla(handles.axes1);
     axes(handles.axes1);
 end
+ etime = toc;
 naming_curve = {} ;
 table_col = {};
 for i = 1 : m
@@ -48,4 +49,5 @@ end
   set(handles.table,'ColumnName' , table_col);
  set(handles.table, 'ColumnWidth', {m*30});
   legend(naming_curve);
+ 
 end
