@@ -272,6 +272,7 @@ if ~get(handles.all_methods, 'value')
               set(handles.steps,'ColumnName' , table_col);
               handles.steps_string= steps_string;
               guidata(hObject,handles);
+              set(handles.time, 'String' , strcat(num2str(etime),'sec'));
             
         case 3  % LU-Decomposition %
             n = get(handles.no_of_eqns, 'String');
@@ -297,6 +298,7 @@ if ~get(handles.all_methods, 'value')
              table_col(end+1) = {'X' };
              table_col(end+1) = {'Y' };
               set(handles.steps,'ColumnName' , table_col);
+               set(handles.time, 'String' , strcat(num2str(etime),'sec'));
             
         case 4  %gauss_jordon%
             n = get(handles.no_of_eqns, 'String');
@@ -323,6 +325,7 @@ if ~get(handles.all_methods, 'value')
               set(handles.steps,'ColumnName' , table_col);
               handles.steps_string= steps_string;
               guidata(hObject,handles);
+               set(handles.time, 'String' , strcat(num2str(etime),'sec'));
             
              
         case 5  %Gauss-Siedel%
@@ -347,10 +350,12 @@ if ~get(handles.all_methods, 'value')
             table_as_cell = num2cell(arr);
             set(handles.table, 'Data', table_as_cell);
             set(handles.solution ,'String',sol);
+               set(handles.time, 'String' , strcat(num2str(etime),'sec'));
             
     end
 else
             %guess seidel
+            time = [];
             set(handles.table,'visible','on');
            set(handles.axes1,'visible','on');
             full_solution ={};
@@ -378,27 +383,36 @@ else
             set(handles.table, 'Data', table_as_cell);
             full_solution(end+1) = {'guess seidel'};
             full_solution(end+1) = {sol};
+            time = strvcat( time, strcat( 'gauss seidel :',num2str(etime),'sec    '));
+          
             % gauss elimination
             [sol , etime,ge_steps] = gauss_elimination(str2num(n),eqns);
             handles.ge_steps = ge_steps;
             sol = num2str(sol);
             full_solution(end+1) = {'gauss elimination'};
             full_solution(end+1) = {sol};
-            
+            time  = strvcat(time,strcat('gauss elimination: ',num2str(etime),'sec ' ));
+   
             %gauss jordon
             [sol ,etime, gj_steps] = gauss_jordon(str2num(n),eqns);
             handles.gj_steps = gj_steps;
-               full_solution(end+1) = {'gauss jordon'};
+            full_solution(end+1) = {'gauss jordon'};
             sol = num2str(sol);
             full_solution(end+1) = {sol};
+            time = strvcat(time,strcat('gauss jordon :',num2str(etime),'sec   '));
+        
              %LU_Decomposition
             [sol,etime,lu_steps] = LU_Decomposition(str2num(n),eqns);
             handles.lu_steps = lu_steps;
             sol = num2str(sol);
             full_solution(end+1) = {'LU Decomposition'};
             full_solution(end+1) = {sol};
+             time = strvcat(time,strcat('LU Decomposition :',num2str(etime),'sec     '));
+        
+             time
             % full solution
             set(handles.solution , 'String' ,full_solution );
+            set(handles.time,'String' ,time);
             guidata(hObject,handles);
 end
 

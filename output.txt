@@ -5,4 +5,4 @@ the solution is:
 	2)	2.600000
 	3)	2.000000
 
-Elapsed Time: 0.117965
+Elapsed Time: 0.097330
