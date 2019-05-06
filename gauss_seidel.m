@@ -17,6 +17,7 @@ LU_mat(1:m+1:m*m)=0;
 LU_mat = LU_mat .* A;
 old_X = zeros(size(X));
 iter = 1;
+precision=zeros(1,m);
 for i = 1 : max_iter
     iter = i;
     old_X = X;
@@ -24,7 +25,8 @@ for i = 1 : max_iter
        X(j) = diag_inverse(j,j) *( B(j) - (LU_mat(j,:)*X)); 
     end 
     err =  abs( (X - old_X) ./ X )  .* 100;
-    arr(i,:) = [ X'  err'];
+    precision = 100 - err;
+    arr(i,:) = [ X'  precision'];
      if (err' < eps*100) == ones(1,m);
         break;
     end
@@ -39,15 +41,18 @@ naming_curve = {} ;
 table_col = {};
 for i = 1 : m
     plot(linspace(1,iter,iter),arr(:,i));
+    xlabel('number of iters');
+    ylabel('roots');
     hold on;
     naming_curve(end+1) = {strcat('x' , num2str(i))};
     table_col(end+1) = {strcat('x' , num2str(i))};
 end
 for i = 1 : m
-    table_col(end+1) = {strcat('error x' , num2str(i))};
+    table_col(end+1) = {strcat('presisionX' , num2str(i))};
 end
+T = array2table(arr,'VariableNames',table_col);
   set(handles.table,'ColumnName' , table_col);
  set(handles.table, 'ColumnWidth', {m*30});
   legend(naming_curve);
- 
+  write_file(solution, etime, 'Gauss seidel',arr,T);
 end

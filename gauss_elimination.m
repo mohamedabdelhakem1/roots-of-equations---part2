@@ -1,6 +1,6 @@
 %systems of equations vector of strings
 %n the number of equations
-function [solution, eTime , steps] = gauss_elimination(m,sys_of_eqns)
+function [solution, etime , steps] = gauss_elimination(m,sys_of_eqns)
 A = zeros(m , m);
 B = zeros(m , 1);
 [A  B] = equationsToMatrix(sym(sys_of_eqns));
@@ -30,6 +30,6 @@ for i = m-1 : -1 : 1
     end
     solution(i) = (B(i)-sum) / A(i,i);
 end
-eTime = toc;
-write_file(solution, eTime, 'Gauss Elimination');
+etime = toc;
+write_file(solution, etime, 'Gauss Elimination',steps);
 end

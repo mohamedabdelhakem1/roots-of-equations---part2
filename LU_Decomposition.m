@@ -7,16 +7,14 @@ a = zeros(n , n);
 b = zeros(n , 1);
 [a  b] = equationsToMatrix(sym(equations));
 
-a
-b
 
 n = size(a, 1);
 
 u = triu(a);
-u
+
 l = tril(a);
 l(1:n+1:n*n)  = 1;
-l
+
 
 lu = a;
 
@@ -41,7 +39,7 @@ for i = 2 : n
     end
 end
 
-y
+
 
 % U X = Y
 x(n) = y(n) / lu(n,n);
@@ -60,5 +58,6 @@ end
 steps  = [l,y,b,u,x,y]
 steps= double(steps);
 etime = toc;
+write_file(x, etime, 'lu decomposition',steps);
 
 end

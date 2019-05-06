@@ -22,7 +22,7 @@ function varargout = GUI_part2(varargin)
 
 % Edit the above text to modify the response to help GUI_part2
 
-% Last Modified by GUIDE v2.5 06-May-2019 01:52:50
+% Last Modified by GUIDE v2.5 06-May-2019 15:59:11
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -729,3 +729,18 @@ function steps_CellSelectionCallback(hObject, eventdata, handles)
 % eventdata  structure with the following fields (see MATLAB.UI.CONTROL.TABLE)
 %	Indices: row and column indices of the cell(s) currently selecteds
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --------------------------------------------------------------------
+function open_tool_ClickedCallback(hObject, eventdata, handles)
+% hObject    handle to open_tool (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+[file,path] = uigetfile('*.txt');
+if isequal(file,0)
+   disp('User selected Cancel');
+else
+    read_file( fullfile(path,file) , handles);
+   disp(['User selected ', fullfile(path,file)]);
+end
+

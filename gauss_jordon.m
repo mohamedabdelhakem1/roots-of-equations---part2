@@ -40,5 +40,7 @@ end
 for i = 1 : m
     solution(i) = B(i) / A(i,i); 
 end
- etime = toc;
+etime = toc;
+write_file(solution, etime, 'Gauss jordan',steps);
+
 end

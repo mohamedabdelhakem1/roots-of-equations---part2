@@ -1,12 +1,24 @@
-function [] = write_file(solution, eTime, name)
-fileID = fopen('output.txt', 'w');
+function [] = write_file(solution, eTime, name ,arr,table)
+edit(strcat(name,'.txt'));
+fileID = fopen( strcat(name,'.txt'), 'w');
 fprintf(fileID, '\t\t%s\n\n', name);
 fprintf(fileID, 'the solution is:\n');
 for i = 1 : length(solution)
     fprintf(fileID, '\t%d)\t%f\n', i, solution(i));
 end
 fprintf(fileID, '\n');
-fprintf(fileID, 'Elapsed Time: %f', eTime);
+fprintf(fileID, 'Elapsed Time: %f\n', eTime);
+switch lower(name)
+    case 'gauss elimination'
+        
+    case 'gauss jordan'
+    case 'lu decomposition'
+    case 'gauss seidel'
+        writetable(table , 'iter.csv');
+        type 'iter.csv';
+ 
+end
 fclose(fileID);
-type output.txt
+string = strcat(name,'.txt');
+type string;
 end
