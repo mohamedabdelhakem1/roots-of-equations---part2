@@ -14,6 +14,12 @@ switch lower(name)
     case 'gauss jordan'
     case 'lu decomposition'
     case 'gauss seidel'
+        for i = 1 : size(arr,1)
+            for j = 1 : size(arr,2)
+                 fprintf(fileID, '\t %d \t%', arr(i,j));
+            end
+             fprintf(fileID, '\n');
+        end
         writetable(table , 'iter.csv');
         type 'iter.csv';
  
