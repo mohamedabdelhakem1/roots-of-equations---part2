@@ -16,7 +16,7 @@ switch lower(name)
     case 'gauss seidel'
         for i = 1 : size(arr,1)
             for j = 1 : size(arr,2)
-                 fprintf(fileID, '\t %d \t%', arr(i,j));
+                 fprintf(fileID, '\t%d%', arr(i,j));
             end
              fprintf(fileID, '\n');
         end
